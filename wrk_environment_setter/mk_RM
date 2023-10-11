@@ -1,4 +1,5 @@
 #!/bin/bash
+# Create a README file without opening text editor
 
 if [ "$1" ]
 then
@@ -6,6 +7,12 @@ then
 	ls >> README.md
 elif [ -z "$1" ]
 then
+	if [[ -e ./README.md ]]
+	then
+		ls >> README.md
+		echo "README file modified"
+		exit 0
+	fi
 	echo "No arguments supplied"
 	ls >> README.md
 fi
@@ -13,8 +20,10 @@ fi
 if [[ -e ./README.md ]]
 then
 	echo "README file created"
+	exit 0
 else
 	echo "Error: README file could not be created."
 	date +"%x %X" >> error_log
 	echo "$0: README file could not be created." >> error_log
+	exit -1
 fi
