@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ "$1" ]
+then
+	echo $1 > README.md
+	ls >> README.md
+elif [ -z "$1" ]
+then
+	echo "No arguments supplied"
+	ls >> README.md
+fi
+
+if [[ -e ./README.md ]]
+then
+	echo "README file created"
+else
+	echo "Error: README file could not be created."
+	date +"%x %X" >> error_log
+	echo "$0: README file could not be created." >> error_log
+fi
