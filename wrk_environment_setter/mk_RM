@@ -9,7 +9,15 @@ elif [ -z "$1" ]
 then
 	if [[ -e ./README.md ]]
 	then
-		ls >> README.md
+		ls $1 | while read f;
+		do
+			if grep -q "$f" "./README.md";
+			then
+				continue
+			else
+				echo "$f" >> README.md
+			fi
+		done
 		echo "README file modified"
 		exit 0
 	fi
