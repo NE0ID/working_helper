@@ -1,0 +1,4 @@
+#!/bin/bash
+# Set aliases for all my scripts
+
+cp ./command_name >> ~/.bashrc
