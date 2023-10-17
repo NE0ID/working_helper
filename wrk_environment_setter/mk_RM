@@ -1,33 +1,77 @@
 #!/bin/bash
 # Create a README file without opening text editor
 
-if [ "$1" ]
-then
-	echo $1 > README.md
-	ls >> README.md
-elif [ -z "$1" ]
+verbose=false
+
+if [ -z "$1" ]
 then
 	if [[ -e ./README.md ]]
 	then
-		ls $1 | while read f;
-		do
-			if grep -q "$f" "./README.md";
-			then
-				continue
-			else
-				echo "$f" >> README.md
-			fi
-		done
-		echo "README file modified"
+		ls | while read f;
+	do
+		if grep -q "$f" "./README.md";
+		then
+			continue
+		else
+			echo "$f" >> README.md
+		fi
+		if [ $verbose ];
+		then
+			echo "README file modified"
+		fi
 		exit 0
+	done
+	else
+	if [ $verbose ];
+	then
+		echo "No arguments supplied"
 	fi
-	echo "No arguments supplied"
-	ls >> README.md
+	ls | while read f;
+	do
+		echo $f >> README.md
+	done
+	exit 0
+	fi
+
+else
+	for i in "$@";
+	do
+		if [[ "$i" != "^-*" ]];
+		then
+			echo $i >> README.md
+		fi
+		if [ "$i" == "^-*" ];
+		then
+			if [ "$i" == "-h" ]; then
+				cat ./help_mkrm
+				exit 1
+			elif [ "$i" == "-v" ]; then
+				verbose=true
+			elif [ "$i" == "-a" ]; then
+				ls -R -X >> README.md
+			elif [ "$i" == "-d" ]; then
+				ls -R -t >> README.md
+			elif [ "$i" == "-D" ]; then
+				ls -R -t -r >> README.md
+			elif [ "$i" == "-f" ]; then
+				filename=$OPTARG
+				echo $desc >> README.md
+			else
+				echo "$i: unknown flag"
+			fi
+
+		else
+			ls -1 -R >> README.md
+		fi
+		done
 fi
 
 if [[ -e ./README.md ]]
 then
-	echo "README file created"
+	if [ $verbose ]
+	then
+		echo "README file created"
+	fi
 	exit 0
 else
 	echo "Error: README file could not be created."
