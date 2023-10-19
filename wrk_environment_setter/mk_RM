@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create a README file without opening text editor
 
-verbose=false
+verbose=$(false)
 
 if [ -z "$1" ]
 then
@@ -34,36 +34,25 @@ then
 	fi
 
 else
-	for i in "$@";
-	do
-		if [[ "$i" != "^-*" ]];
-		then
-			echo $i >> README.md
-		fi
-		if [ "$i" == "^-*" ];
-		then
-			if [ "$i" == "-h" ]; then
-				cat ./help_mkrm
-				exit 1
-			elif [ "$i" == "-v" ]; then
-				verbose=true
-			elif [ "$i" == "-a" ]; then
-				ls -R -X >> README.md
-			elif [ "$i" == "-d" ]; then
-				ls -R -t >> README.md
-			elif [ "$i" == "-D" ]; then
-				ls -R -t -r >> README.md
-			elif [ "$i" == "-f" ]; then
-				filename=$OPTARG
-				echo $desc >> README.md
-			else
-				echo "$i: unknown flag"
-			fi
-
-		else
-			ls -1 -R >> README.md
-		fi
-		done
+	while getopts "hvadDf" opt; do
+		#elif [[ "$i" == ^- ]];
+		#then
+	case $opt in
+		h) cat ./help_mkrm
+			exit 1 ;;
+		v) verbose=$(true) ;;
+		a) ls -R -X >> README.md 
+			exit 0 ;;
+		d) ls -R -t >> README.md 
+			exit 0 ;;
+		D) ls -R -t -r >> README.md 
+			exit 0;;
+		f) filename=$OPTARG ;;
+		\?) echo "$i: unknown flag" ;;
+	esac
+done
+	echo -e "$i $(cat README.md)" > README.md
+	ls -1 -R >> README.md
 fi
 
 if [[ -e ./README.md ]]
