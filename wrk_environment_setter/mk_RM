@@ -32,7 +32,7 @@ then
 	fi
 
 else
-	while getopts "w:hqadDf:" opt; do
+	while getopts "t:w:hqadDf:" opt; do
 	case $opt in
 		h) cat ./help_mkrm
 			exit 1 ;;
@@ -48,7 +48,17 @@ else
 			echo $filename >> README.md ;;
 		w)
 			desc=$OPTARG
-			sed -i "1s/^/$desc\n/" README.md;;
+			touch README.md
+			if [ -z "$title"]
+			then
+				awk 'NR==2 {print "$desc"} 1'
+			else
+			sed -i "1s/^/$desc\n/" README.md
+			fi;;
+		t)
+			title=$OPTARG
+			touch README.md
+			sed -i "1s/^/\# \*\*$title\*\*\n/" README.md;;
 		\?) echo "$i: unknown flag" ;;
 	esac
 done

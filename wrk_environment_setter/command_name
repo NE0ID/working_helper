@@ -1,2 +1,3 @@
 alias mkrm= "/home/working_helper/mk_RM"
 alias author= "/home/working_helper/mk_auth"
+alias cleer= "rm -f /home/working_helper/error_log"
