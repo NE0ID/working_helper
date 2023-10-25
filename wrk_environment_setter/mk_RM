@@ -11,7 +11,7 @@ then
 		then
 			continue
 		else
-			echo "$f" >> README.md
+			echo "> $f" >> README.md
 		fi
 		if [ $verbose ];
 		then
@@ -26,40 +26,47 @@ then
 	fi
 	ls -R -1 | while read f;
 	do
-		echo $f >> README.md
+		echo " > $f" >> README.md
 	done
 	exit 0
 	fi
 
 else
-	while getopts "t:w:hqadDf:" opt; do
-	case $opt in
-		h) cat ./help_mkrm
-			exit 1 ;;
-		q) verbose=$(false) ;;
-		a)
-			ls -R -X >> README.md ;;
-		d)
-			ls -R -t >> README.md ;;
-		D)
-			ls -R -t -r >> README.md ;;
-		f)
-			filename=$OPTARG
-			echo $filename >> README.md ;;
-		w)
-			desc=$OPTARG
+	while getopts "t:w:f:hqadD" opt; do
+		case $opt in
+			t)
 			touch README.md
-			if [ -z "$title"]
-			then
-				awk 'NR==2 {print "$desc"} 1'
-			else
-			sed -i "1s/^/$desc\n/" README.md
-			fi;;
-		t)
 			title=$OPTARG
-			touch README.md
 			sed -i "1s/^/\# \*\*$title\*\*\n/" README.md;;
-		\?) echo "$i: unknown flag" ;;
+			w)
+			touch README.md
+			desc=$OPTARG
+			line=$(head -n 1 README.md)
+			if grep -q $title $line
+			then
+				sed -i "2s/^/$desc\n/" README.md
+			else
+				sed -i "1s/^/$desc\n/"
+			fi;;
+			h) cat ./help_mkrm
+			exit 1 ;;
+			q) verbose=$(false) ;;
+			a) ls -R -X -A| while read f;
+			do
+				echo "> $f" >> README.md
+			done;;
+			d) ls -R -t -A | while read f;
+			do
+				echo "> $f" >> README.md
+			done;;
+			D) ls -R -t -r -A | while read f;
+			do
+				echo "> $f" >> README.md
+			done;;
+			f) filename=$OPTARG
+				echo $filename >> README.md
+				touch $filename;;
+			\?) echo "$i: unknown flag" ;;
 	esac
 done
 fi
