@@ -24,7 +24,7 @@ then
 	then
 		echo "No arguments supplied"
 	fi
-	ls | while read f;
+	ls -R -1 | while read f;
 	do
 		echo $f >> README.md
 	done
@@ -32,7 +32,7 @@ then
 	fi
 
 else
-	while getopts "hqadDf:w:" opt; do
+	while getopts "w:hqadDf:" opt; do
 	case $opt in
 		h) cat ./help_mkrm
 			exit 1 ;;
@@ -48,11 +48,10 @@ else
 			echo $filename >> README.md ;;
 		w)
 			desc=$OPTARG
-			echo -n $desc | cat README.md > README.md ;;
+			sed -i "1s/^/$desc\n/" README.md;;
 		\?) echo "$i: unknown flag" ;;
 	esac
 done
-	ls -1 -R >> README.md
 fi
 
 if [[ -e ./README.md ]]
@@ -68,3 +67,4 @@ else
 	echo "$0: README file could not be created." >> error_log
 	exit -1
 fi
+#echo -n $desc | cat README.md > README.md ;;
