@@ -5,7 +5,7 @@ if [ -z "$1" ]
 then
 	if [[ -e ./README.md ]]
 	then
-		ls | while read f;
+		ls -R -1 -A | while read f;
 	do
 		if grep -q "$f" "./README.md";
 		then
@@ -24,7 +24,7 @@ then
 	then
 		echo "No arguments supplied"
 	fi
-	ls -R -1 | while read f;
+	ls -R -1 -A | while read f;
 	do
 		echo " > $f" >> README.md
 	done
@@ -37,16 +37,30 @@ else
 			t)
 			touch README.md
 			title=$OPTARG
-			sed -i "1s/^/\# \*\*$title\*\*\n/" README.md;;
+			if [ ! -s "README.md" ];
+			then
+				echo "# **$title**" > README.md
+			else
+				cat README.md >> tmp
+				echo "# **$title**" > README.md
+				cat tmp >> README.md
+				rm -f tmp
+			fi;;
 			w)
 			touch README.md
 			desc=$OPTARG
 			line=$(head -n 1 README.md)
-			if grep -q $title $line
+			if [[ "$line" == "> " ]]
 			then
-				sed -i "2s/^/$desc\n/" README.md
+				cat README.md > tmp
+				echo "$desc" > README.md
+				cat tmp >> README.md
+				rm -f tmp
+			elif [ ! -s "README.md" ];
+			then
+				echo "$desc" > README.md
 			else
-				sed -i "1s/^/$desc\n/"
+				head -n 2 README.md | echo "$desc" >> README.md
 			fi;;
 			h) cat ./help_mkrm
 			exit 1 ;;
@@ -67,7 +81,16 @@ else
 				echo $filename >> README.md
 				touch $filename;;
 			\?) echo "$i: unknown flag" ;;
-	esac
+		esac
+	done
+	ls -R -1 -A | while read f
+do
+	if grep -q "$f" "./README.md" ;
+	then
+		break
+	else
+		echo "> $f" >> README.md
+	fi
 done
 fi
 
