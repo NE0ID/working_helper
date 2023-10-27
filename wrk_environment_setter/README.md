@@ -1,13 +1,20 @@
+# **Personnal Project**
 Please note that everything in this directory is still in developpement. Thank you !
 This is the work environment setter directory. It contains:
-aliases:
+> aliases:
 	/!\ Check command_name file before executing
-command_name:
+> command_name:
 	you can change aliases/commands name
 	to ignore write "#" before the line or delete (not recommended)
-mk_RM:
-	usage mkrm "Text to implement in README.md"
-	options : -a / --alphabet - write files into files in alphabet order
-		  -d / --date	  - write files from most rectent to oldest
-		  -D		  - write files from oldest to newer
-README.md
+> mk_RM:
+	- usage mkrm "Text to implement in README.md"
+	- options :
+> -a - write files into files in alphabet order
+> -d - write files from most rectent to oldest
+> -D - write files from oldest to newer
+> -f - allow you to add a file who doesn't exist in your directory yet. The file will be created too
+> -t - add a title according to input
+> -w - add description according to input
+> -q - doesn't show verbose (not functionnal)
+> -h - display help
+> README.md

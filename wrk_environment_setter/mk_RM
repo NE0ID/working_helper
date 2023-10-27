@@ -32,66 +32,89 @@ then
 	fi
 
 else
-	while getopts "t:w:f:hqadD" opt; do
-		case $opt in
-			t)
-			touch README.md
-			title=$OPTARG
-			if [ ! -s "README.md" ];
-			then
-				echo "# **$title**" > README.md
-			else
-				cat README.md >> tmp
-				echo "# **$title**" > README.md
-				cat tmp >> README.md
-				rm -f tmp
-			fi;;
-			w)
-			touch README.md
-			desc=$OPTARG
-			line=$(head -n 1 README.md)
-			if [[ "$line" == "> " ]]
-			then
-				cat README.md > tmp
-				echo "$desc" > README.md
-				cat tmp >> README.md
-				rm -f tmp
-			elif [ ! -s "README.md" ];
-			then
-				echo "$desc" > README.md
-			else
-				head -n 2 README.md | echo "$desc" >> README.md
-			fi;;
-			h) cat ./help_mkrm
-			exit 1 ;;
-			q) verbose=$(false) ;;
-			a) ls -R -X -A| while read f;
-			do
-				echo "> $f" >> README.md
-			done;;
-			d) ls -R -t -A | while read f;
-			do
-				echo "> $f" >> README.md
-			done;;
-			D) ls -R -t -r -A | while read f;
-			do
-				echo "> $f" >> README.md
-			done;;
-			f) filename=$OPTARG
-				echo $filename >> README.md
-				touch $filename;;
-			\?) echo "$i: unknown flag" ;;
-		esac
-	done
-	ls -R -1 -A | while read f
-do
-	if grep -q "$f" "./README.md" ;
+	if [[ -e ./README.md ]]
 	then
-		break
+		while getopts "f:hq" opt; do
+			case $opt in
+				f)
+					filename=$OPTARG
+					echo "> $filename" >> README.md
+					touch $filename;;
+				h)
+					cat ./help_mkrm
+					exit 1;;
+				q)
+					verbose=$(false) ;;
+			esac
+		done
+		if [ $verbose ];
+		then
+			echo "README file modified"
+		fi
 	else
-		echo "> $f" >> README.md
+		while getopts "t:w:f:hqadD" opt; do
+			case $opt in
+				t)
+				touch README.md
+				title=$OPTARG
+				if [ ! -s "README.md" ];
+				then
+					echo "# **$title**" > README.md
+				else
+					cat README.md >> tmp
+					echo "# **$title**" > README.md
+					cat tmp >> README.md
+					rm -f tmp
+				fi;;
+				w)
+				touch README.md
+				desc=$OPTARG
+				line=$(head -n 1 README.md)
+				if [[ "$line" == "> " ]]
+				then
+					cat README.md > tmp
+					echo "$desc" > README.md
+					cat tmp >> README.md
+					rm -f tmp
+				elif [ ! -s "README.md" ];
+				then
+					echo "$desc" > README.md
+				else
+					head -n 2 README.md | echo "$desc" >> README.md
+				fi;;
+				h)
+					cat ./help_mkrm
+					exit 1 ;;
+				q) verbose=$(false) ;;
+				a)
+					ls -R -X -A| while read f;
+				do
+					echo "> $f" >> README.md
+				done;;
+				d) ls -R -t -A | while read f;
+				do
+					echo "> $f" >> README.md
+				done;;
+				D) ls -R -t -r -A | while read f;
+				do
+					echo "> $f" >> README.md
+				done;;
+				f) filename=$OPTARG
+					echo "> $filename" >> README.md
+					touch $filename;;
+				\?) echo "$i: unknown flag" ;;
+			esac
+		done
 	fi
-done
+		ls -R -1 -A | while read f;
+	do
+		if grep -q "$f" "./README.md" ;
+		then
+			continue
+		else
+			echo "> $f" >> README.md
+		fi
+	done
 fi
 
 if [[ -e ./README.md ]]
@@ -107,4 +130,3 @@ else
 	echo "$0: README file could not be created." >> error_log
 	exit -1
 fi
-#echo -n $desc | cat README.md > README.md ;;

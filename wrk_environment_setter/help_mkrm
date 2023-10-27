@@ -1,0 +1,17 @@
+help mkrm
+mkrm [-a] [-d] [-D] [-w] [-t] [-f]
+Create a README file.
+
+Create a README file which contains files/subdirectories name of current directory. mkrm takes options but no arguments
+
+Options :
+	-a	will write files in alphabetical order (only when first created)
+	-d	will write files from most recent to oldest file (only when first created)
+	-D	will write files from oldest to newest file (only when first created)
+	-w	will write description according to user's input
+	-t	will write a title according to user's input
+	-f	will write a non existing fileneme into README.md. File will be created
+
+Exit with -1 if error, 1 or 2 if success.
+mkrm is NOT a builtin command. You're welcome to modify / add things as you please.
+NE0ID : https://github.com/NE0ID
