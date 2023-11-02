@@ -1,0 +1,18 @@
+#!/bin/bash
+# Clear the error log
+
+while getopts "dhv" opts; do
+	case $opts in
+		v) verbose=true ;;
+		d) rm -f /home/working_helper/wrk_environment_setter/error_log
+			if [ "$verbose" = true ]
+			then
+				echo "Error_log deleted"
+				fi ;;
+		h) cat ./cleer_help ;;
+	esac
+done
+if [[ -z /home/working_helper/wrk_environment_setter/error_log ]]
+then
+	truncate -s 0 /home/working_helper/wrk_environment_setter/error_log
+fi

@@ -45,6 +45,8 @@ else
 					exit 1;;
 				q)
 					verbose=$(false) ;;
+				\?)
+					echo "Invalide flags: for more informations 'mkrm -h'"
 			esac
 		done
 		if [ $verbose ];

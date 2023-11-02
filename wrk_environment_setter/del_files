@@ -1,0 +1,6 @@
+#!/bin/bash
+# Delete files or directory (more secured than rm)
+
+while getopts "fdiIrvh" opts ; do
+	case $opts in
+

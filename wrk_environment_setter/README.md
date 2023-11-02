@@ -6,7 +6,7 @@ This is the work environment setter directory. It contains:
 > command_name:
 	you can change aliases/commands name
 	to ignore write "#" before the line or delete (not recommended)
-> mk_RM:
+> mk_RM | create a README file:
 	- usage mkrm "Text to implement in README.md"
 	- options :
 > -a - write files into files in alphabet order
@@ -18,3 +18,13 @@ This is the work environment setter directory. It contains:
 > -q - doesn't show verbose (not functionnal)
 > -h - display help
 > README.md
+> clear_err | delete content from error_log:
+- usage cleer --options
+- options :
+> -v - display verbose
+> -d - completely delete error_log file
+> -h - display help
+> cleer_help : help for cleer
+> help_mkrm : help for mkrm
+> settings
+> set_trash
