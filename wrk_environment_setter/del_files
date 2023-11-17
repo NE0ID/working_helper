@@ -1,6 +1,16 @@
 #!/bin/bash
 # Delete files or directory (more secured than rm)
 
-while getopts "fdiIrvh" opts ; do
-	case $opts in
+if [[ -z "trash/trashfiles" ]];
+then
+	tar -czf trash/trashfiles "$@"
+else
+fi
 
+if [[ "$?" -ne 0 ]];
+then
+	echo "Error: File(s) could not be deleted."
+	date +"%x %X" >> error_log
+	echo "$0: File(s) could not be deleted." >> error_log
+	exit -1
+fi
