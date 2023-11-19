@@ -28,3 +28,5 @@ This is the work environment setter directory. It contains:
 > help_mkrm : help for mkrm
 > settings
 > set_trash
+> del_dir
+> del_files

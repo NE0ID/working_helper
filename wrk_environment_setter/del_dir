@@ -1,0 +1,6 @@
+#!/bin/bash
+
+now=$(date +"%m_%d_%Y")
+tnow=$(date "+%T")
+
+tar -czf trash/$now"dir_"$tnow "$@" --remove-files

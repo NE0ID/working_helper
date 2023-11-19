@@ -1,11 +1,40 @@
 #!/bin/bash
 # Delete files or directory (more secured than rm)
 
-if [[ -z "trash/trashfiles" ]];
-then
-	tar -czf trash/trashfiles "$@"
-else
+if [[ -z "$1" ]]; then
+	echo "dl: arguments missing"
+	echo "dl -h for help"
+	exit 1
 fi
+
+while getopts "hd:f:" opt; do
+	case $opt in
+		h)
+			cat dl_help
+			exit 0
+			;;
+		d)
+			dir=$OPTARG
+			if [[ -d $dir ]];
+			then
+				bash ./del_dir "$dir"
+			else
+				echo "Cannot delete directory: $dir is not a directory"
+				exit 0
+			fi;;
+		f)
+			file=$OPTARG
+			if [[ -d $file ]];
+			then
+				echo "Cannot delete file: $file is a directory"
+				exit 0
+			else
+				bash ./del_fl "$file"
+			fi;;
+		?)
+			echo "Unknown option";;
+	esac
+done
 
 if [[ "$?" -ne 0 ]];
 then
