@@ -1,5 +1,5 @@
 #!/bin/bash
 
 now=$(date +"%m_%d_%Y")
-tnow=$(date +%T)
+tnow=$(date +"%T")
 tar -czf trash/$now"file_"$tnow "$@" --remove-file
