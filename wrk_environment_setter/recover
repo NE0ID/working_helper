@@ -6,5 +6,6 @@ then
 	do
 		tar -ztvf $f
 	done
+	exit 0
 fi
-tar 
+tar -xzvf $1 $2

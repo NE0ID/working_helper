@@ -5,28 +5,21 @@ if [[ -z "$1" ]]; then
 	echo "dl: arguments missing"
 	echo "dl -h for help"
 	exit 1
-fi
-
-while getopts "hd:f:" opt; do
-	case $opt in
-		h)
+else
+	for i in $*; do
+		if [[ $i == *-h* ]]; then
 			cat dl_help
 			exit 0
-			;;
-		d)
-			while [[ $@ != *-* ]]; do
-				bash ./del_dir "$@"
-			done
-			;;
-		f)
-			while [[ $@ != *-* ]]; do
-				bash ./del_fl "$@"
-			done
-			;;
-		?)
-			echo "Unknown option";;
-	esac
-done
+
+		else
+			if [[ -d $i ]]; then
+				bash ./del_dir $i
+			else
+				bash ./del_fl $i
+			fi
+		fi
+	done
+fi
 
 if [[ "$?" -ne 0 ]];
 then
