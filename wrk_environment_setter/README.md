@@ -30,3 +30,4 @@ This is the work environment setter directory. It contains:
 > set_trash
 > del_dir
 > del_files
+> cl_tr

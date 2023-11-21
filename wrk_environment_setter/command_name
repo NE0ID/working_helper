@@ -1,3 +1,6 @@
-alias mkrm= "/home/working_helper/wrk_environment_setter/mk_RM"
-alias author= "/home/working_helper/wrk_environment_setter/mk_auth"
-alias cleer= "rm -f /home/working_helper/wrk_environment_setter/clear_err"
+alias mkrm='/home/working_helper/wrk_environment_setter/mk_RM'
+alias author='/home/working_helper/wrk_environment_setter/mk_auth'
+alias cleer='/home/working_helper/wrk_environment_setter/clear_err'
+alias dl='/home/working_helper/wrk_environment_setter/del_files'
+alias recover='/home/working_helper/wrk_environment_setter/recover'
+alias trclear='/home/working_helper/wrk_environment_setter/cl_tr'

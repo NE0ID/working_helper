@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Files will be deleted after 15 days : to change set time change number after 
+# "-mtime" (please do keep in mind that this functionnality is in its early version)
+# You can also definetely delete files manualy with cl_tr (clear trash)
+
+find ./trash/* ! -type d -mtime 15 -exec rm -f {} +
+
