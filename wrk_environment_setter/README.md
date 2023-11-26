@@ -1,5 +1,5 @@
-## **Personnal Project**
-Please note that everything in this directory is still in developpement. Thank you !
+# **Personnal Project**
+Please note that everything in this directory is still in developpement. Thank you for your understanding !
 This is the work environment setter directory. It contains:
 - aliases:
 	/!\ Check command_name file before executing
