@@ -11,7 +11,7 @@ then
 		then
 			continue
 		else
-			echo "> $f" >> README.md
+			echo "- $f" >> README.md
 		fi
 		if [ $verbose ];
 		then
@@ -26,7 +26,7 @@ then
 	fi
 	ls -R -1 -A | while read f;
 	do
-		echo " > $f" >> README.md
+		echo " - $f" >> README.md
 	done
 	exit 0
 	fi
@@ -38,7 +38,7 @@ else
 			case $opt in
 				f)
 					filename=$OPTARG
-					echo "> $filename" >> README.md
+					echo "- $filename" >> README.md
 					touch $filename;;
 				h)
 					cat ./help_mkrm
@@ -91,18 +91,18 @@ else
 				a)
 					ls -R -X -A| while read f;
 				do
-					echo "> $f" >> README.md
+					echo "- $f" >> README.md
 				done;;
 				d) ls -R -t -A | while read f;
 				do
-					echo "> $f" >> README.md
+					echo "- $f" >> README.md
 				done;;
 				D) ls -R -t -r -A | while read f;
 				do
-					echo "> $f" >> README.md
+					echo "- $f" >> README.md
 				done;;
 				f) filename=$OPTARG
-					echo "> $filename" >> README.md
+					echo "- $filename" >> README.md
 					touch $filename;;
 				\?) echo "$i: unknown flag" ;;
 			esac
@@ -114,7 +114,7 @@ else
 		then
 			continue
 		else
-			echo "> $f" >> README.md
+			echo "- $f" >> README.md
 		fi
 	done
 fi
