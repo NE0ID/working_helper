@@ -85,7 +85,7 @@ else
 					head -n 2 README.md | echo "$desc" >> README.md
 				fi;;
 				h)
-					cat ./help_mkrm
+					cat /home/working_helper/wrk_environment_setter/help_mkrm
 					exit 1 ;;
 				q) verbose=$(false) ;;
 				a)

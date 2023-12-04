@@ -2,10 +2,9 @@
 
 if [[ -f "$@" ]];
 then
-	#sed 's/ \+ /\t/g' $@ > tmp
-	while IFS= read -r line; do
-		tr -cd ' \t' | wc -c
-	sed -e 's/    /\t/g' $@ > new
+	sed 's/ \+ /\t/g' $@ > tmp
+	mv tmp $@
+
 elif [[ -z "$@" ]];
 then
 	echo "Error : no file passed"
