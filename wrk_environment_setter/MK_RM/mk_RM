@@ -85,7 +85,7 @@ else
 					head -n 2 README.md | echo "$desc" >> README.md
 				fi;;
 				h)
-					cat /home/working_helper/wrk_environment_setter/help_mkrm
+					cat /home/working_helper/wrk_environment_setter/MK_RM/help_mkrm
 					exit 1 ;;
 				q) verbose=$(false) ;;
 				a)
@@ -128,7 +128,7 @@ then
 	exit 0
 else
 	echo "Error: README file could not be created."
-	date +"%x %X" >> error_log
-	echo "$0: README file could not be created." >> error_log
+	date +"%x %X" >> /home/working_helper/wrk_environment_setter/ERR/error_log
+	echo "$0: README file could not be created." >> /home/working_helper/wrk_environment_setter/ERR/error_log
 	exit -1
 fi

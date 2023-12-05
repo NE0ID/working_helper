@@ -2,7 +2,7 @@
 
 if [[ "$@" == *--list* ]];
 then
-	ls -1 ./trash/* | while read f;
+	ls -1 /home/working_helper/wrk_environment_setter/DLT/trash/* | while read f;
 	do
 		tar -ztvf $f
 	done

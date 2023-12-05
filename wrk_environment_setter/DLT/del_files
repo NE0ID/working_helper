@@ -8,7 +8,7 @@ if [[ -z "$1" ]]; then
 else
 	for i in $*; do
 		if [[ $i == *-h* ]]; then
-			cat dl_help
+			cat /home/working_helper/wrk_environment_setter/DLT/dl_help
 			exit 0
 
 		else
@@ -24,7 +24,7 @@ fi
 if [[ "$?" -ne 0 ]];
 then
 	echo "Error: File(s) could not be deleted."
-	date +"%x %X" >> error_log
-	echo "$0: File(s) could not be deleted." >> error_log
+	date +"%x %X" >> /home/working_helper/wrk_environment_setter/ERR/error_log
+	echo "$0: File(s) could not be deleted." >> /home/working_helper/wrk_environment_setter/ERR/error_log
 	exit -1
 fi

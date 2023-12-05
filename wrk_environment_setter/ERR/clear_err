@@ -4,7 +4,7 @@
 while getopts "dhv" opts; do
 	case $opts in
 		v) verbose=true ;;
-		d) rm -f /home/working_helper/wrk_environment_setter/error_log
+		d) rm -f /home/working_helper/wrk_environment_setter/ERR/error_log
 			if [ "$verbose" = true ]
 			then
 				echo "Error_log deleted"
@@ -14,5 +14,5 @@ while getopts "dhv" opts; do
 done
 if [[ -z /home/working_helper/wrk_environment_setter/error_log ]]
 then
-	truncate -s 0 /home/working_helper/wrk_environment_setter/error_log
+	truncate -s 0 /home/working_helper/wrk_environment_setter/ERR/error_log
 fi

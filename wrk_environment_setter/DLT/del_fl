@@ -4,7 +4,7 @@ if [[ -f $@ ]];
 then
 	now=$(date +"%m_%d_%Y")
 	tnow=$(date +"%T")
-	tar -czf trash/"f"$now":"$tnow "$@" --remove-file
+	tar -czf /home/working_helper/wrk_environment_setter/DLT/trash/"f"$now":"$tnow "$@" --remove-file
 elif [[ -d $@ ]];
 then
 	echo "Cannot delete file: $@ is a directory"
