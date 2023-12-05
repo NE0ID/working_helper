@@ -1,8 +1,15 @@
 #!/bin/bash
 
+param=" "
+
 if [[ -f "$@" ]];
 then
-	sed 's/ \+ /\t/g' $@ > tmp
+	if [[ $param = *[!\ ]* ]];
+	then
+		sed 's/ \+ /\t/g' $@ >> tmp
+	else
+		sed 's/ \+ //g' $@ >> tmpmv tmp $@
+	fi
 	mv tmp $@
 
 elif [[ -z "$@" ]];
